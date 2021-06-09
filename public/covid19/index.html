@@ -10,6 +10,8 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
         integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"></script>
+
     <!-- CssPropio -->
     <!-- <link rel="stylesheet" href="assets/css/style.css" /> -->
     <title>Document</title>
@@ -34,6 +36,33 @@
             </ul>
         </div>
     </nav>
+    <!-- GRAFICO -->
+    <div class="container my-4">
+        <h2 class="text-center my-2">Paises con Covid19</h2>
+        <canvas id="graficoPrincipal" width="400" height="400"></canvas>
+    </div>
+
+    <!-- TABLA -->
+
+    <div class="container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Pais</th>
+                    <th scope="col">Confirmados</th>
+                    <th scope="col">Muertes</th>
+                    <th scope="col">Recuperados</th>
+                    <th scope="col">Activos</th>
+                    <th scope="col">Ver detalle</th>
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- modal -->
 
 
     <!-- ScrpitsBootstrap -->
@@ -46,7 +75,11 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
     <!-- ScriptPropio -->
+
+
+
     <script src="assets/scripts.js"></script>
+
 </body>
 
 </html>
