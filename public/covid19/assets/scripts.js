@@ -143,7 +143,7 @@ let funcionPrincipal = async () => {
     console.log(datosFiltrados)
     rellenarGrafico(datosFiltrados, "graficoPrincipal")
     imprimirTabla(datos)
-    rellenoModal('India')
+    // rellenoModal('India')
 
 }
 
