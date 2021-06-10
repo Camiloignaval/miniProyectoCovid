@@ -8,7 +8,6 @@ const getTotal = async (addLink) => {
 
 const rellenarGrafico = (datos, id) => {
     let nombres = datos.map(pais => pais.location)
-
     let activos = datos.map(pais => pais.confirmed)
     let confirmados = datos.map(pais => pais.deaths)
     let muertos = datos.map(pais => pais.recovered)
@@ -52,40 +51,36 @@ const rellenoModal = async (pais) => {
     let nombreJunto = pais.split(' ').join('');
     // console.log(nombreJunto);
     let datos = await getTotal(`countries/${nombreJunto}`);
-    console.log(datos)
-    // rellenarGrafico(datos, `graficoModal${datos.location}`)
+    // console.log(datos)
+    let titulo = document.querySelector('.modal-title')
+    titulo.innerHTML = `Detalles de ${datos.location}`
+    let cuerpo = document.querySelector(`.modal-body`)
+    // console.log(cuerpo);
+    cuerpo.innerHTML = `<canvas id="graficoModal" width="400" height="300"></canvas>`
+
     // FORMA SIN FUNCIONES
-    new Chart(document.getElementById(`graficoModal${datos.Location}`), {
+    new Chart(document.getElementById(`graficoModal`), {
         type: 'bar',
+
         data: {
-            labels: datos.Location,
+            labels: ["casos confirmados", "casos muertos", "casos recuperados", "Casos activos"],
             datasets: [
                 {
-                    label: "Casos activos",
-                    backgroundColor: "#CB2E2E",
-                    data: datos.active
-                }, {
-                    label: "casos confirmados",
-                    backgroundColor: "#F0D522",
-                    data: datos.confirmed
-                }, {
-                    label: "casos muertos",
-                    backgroundColor: "#939393",
-                    data: datos.deaths
-                }, {
-                    label: "casos recuperados",
-                    backgroundColor: "#22A5F0",
-                    data: datos.recovered
-                }
+                    label: datos.location,
+                    backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
+                    data: [datos.confirmed, datos.deaths, datos.recovered, datos.active]
+                },
+
             ]
         },
         options: {
             title: {
-                display: true,
-                text: 'Population growth (millions)'
+                display: false,
+                text: datos.location
             }
         }
     });
+
 
 }
 
@@ -94,36 +89,21 @@ const imprimirTabla = (array) => {
     let tabla = document.getElementById('cuerpoTabla');
     let relleno = array.map(dato => {
 
+
         return ` <tr>
     <th>${dato.location}</th>
     <td>${dato.confirmed}</td>
     <td>${dato.deaths}</td>
     <td>${dato.recovered}</td>
     <td>${dato.active}</td>
-    <td><button class='verMas btn btn-primary' data-toggle="modal" data-target="#modal${dato.location}">Detalles</button></td>
+    <td><button id='btn${dato.location}' type='button' class='verMas btn btn-primary' data-toggle="modal" data-target="#modal">Detalles</button></td>
 </tr>
-<div class="modal" id="modal${dato.location}" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Detalles de ${dato.location}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <canvas id="graficoModal${dato.location}"  width="400" height="400"></canvas>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 `
     }).join('');
 
     tabla.innerHTML = relleno;
+
 }
 
 
@@ -140,12 +120,20 @@ let funcionPrincipal = async () => {
     // let dato = await getTotal('countries/SolomonIslands')
     // console.log(dato)
 
-    console.log(datosFiltrados)
+    // console.log(datosFiltrados)
     rellenarGrafico(datosFiltrados, "graficoPrincipal")
     imprimirTabla(datos)
     // rellenoModal('India')
 
+    // llamada a boton verMas
+    let arrayBtns = document.querySelectorAll('.verMas');
+    arrayBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            let pais = btn.id.slice(3)
+            rellenoModal(pais)
+        })
+    });
+
 }
 
 funcionPrincipal()
-
