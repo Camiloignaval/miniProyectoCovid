@@ -3,6 +3,13 @@ import rellenarGrafico from "./rellenoGrafico.js";
 import imprimirTabla from "./imprimirTabla.js";
 import rellenoModal from "./rellenoModal.js";
 import { postData, getData } from "./post_get.js";
+import visibilidad from "./visibilidad.js";
+
+let errorLogin = () => {
+
+    document.getElementById('mensajeLogin').innerHTML = 'Credenciales incorrectas'
+
+}
 
 (async () => {
     let datos = await request('total')
@@ -22,20 +29,25 @@ import { postData, getData } from "./post_get.js";
 
 })();
 
-const visibilidad = () => {
-    $('#navChile').removeClass('d-none');
-    $('#navLogin').addClass('d-none');
-    $('#navCerrar').removeClass('d-none');
-}
-
 document.getElementById('formLogin').addEventListener('submit', async (event) => {
     event.preventDefault()
-
     const email = document.getElementById('inputEmail').value;
     const password = document.getElementById('inputPass').value;
 
+
     let JWT = await postData(email, password);
-    if (JWT) { visibilidad() }
+    // console.log(JWT);
+    if (JWT) {
+        visibilidad()
+        $("#modalLogin").modal('hide');
+    }
+    else {
+        errorLogin()
+    }
+})
+document.getElementById('logout').addEventListener('click', () => {
+    localStorage.clear();
+    location.reload();
 
 })
 
@@ -48,8 +60,3 @@ const init = async () => {
 
 init()
 
-document.getElementById('logout').addEventListener('click', () => {
-    localStorage.clear();
-    location.reload();
-
-})

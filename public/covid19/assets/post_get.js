@@ -5,15 +5,23 @@ const postData = async (email, password) => {
                 method: 'POST',
                 body: JSON.stringify({ email: email, password: password })
             })
+        // console.log(response)
+
         const { token } = await response.json()
-        if (token) {
+        if (token == undefined) {
+            return false;
+        }
+        else if (token) {
             localStorage.setItem('jsToken', token)
+            return token
+        }
+        else {
+            throw new Error('No es posible conectarse con servidor')
         }
 
-        // console.log(token);
-        return token
+
     } catch (err) {
-        console.error(`Error: ${err}`)
+        console.error(`Error`)
     }
 }
 
