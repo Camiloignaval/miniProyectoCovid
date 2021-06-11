@@ -2,7 +2,6 @@
 const getTotal = async (addLink) => {
     let response = await fetch(`http://localhost:3000/api/${addLink}`);
     let { data } = await response.json()
-    // console.log(data)
     return data
 }
 
@@ -48,15 +47,17 @@ const rellenarGrafico = (datos, id) => {
 }
 
 const rellenoModal = async (pais) => {
-    let nombreJunto = pais.split(' ').join('');
-    // console.log(nombreJunto);
+    let cuerpo = document.querySelector(`.modal-body`)
+    cuerpo.innerHTML = ''
+
+    let nombreJunto = pais.split(' ').join('%20');
     let datos = await getTotal(`countries/${nombreJunto}`);
-    // console.log(datos)
+    console.log(datos)
+    console.log(datos)
     let titulo = document.querySelector('.modal-title')
     titulo.innerHTML = `Detalles de ${datos.location}`
-    let cuerpo = document.querySelector(`.modal-body`)
-    // console.log(cuerpo);
-    cuerpo.innerHTML = `<canvas id="graficoModal" width="400" height="300"></canvas>`
+
+    cuerpo.innerHTML = `<canvas id="graficoModal"></canvas>`
 
     // FORMA SIN FUNCIONES
     new Chart(document.getElementById(`graficoModal`), {
@@ -117,13 +118,10 @@ btnsVer.forEach(btn => {
 let funcionPrincipal = async () => {
     let datos = await getTotal('total')
     let datosFiltrados = datos.filter(dato => dato.active > 10000)
-    // let dato = await getTotal('countries/SolomonIslands')
-    // console.log(dato)
 
-    // console.log(datosFiltrados)
     rellenarGrafico(datosFiltrados, "graficoPrincipal")
     imprimirTabla(datos)
-    // rellenoModal('India')
+
 
     // llamada a boton verMas
     let arrayBtns = document.querySelectorAll('.verMas');
