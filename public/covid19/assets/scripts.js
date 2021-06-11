@@ -4,7 +4,7 @@ import imprimirTabla from "./imprimirTabla.js";
 import rellenoModal from "./rellenoModal.js";
 
 
-let funcionPrincipal = (async () => {
+(async () => {
     let datos = await request('total')
     let datosFiltrados = datos.filter(dato => dato.active > 10000)
 
