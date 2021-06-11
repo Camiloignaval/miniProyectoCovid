@@ -29,8 +29,14 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Iniciar sesión</a>
+                <li id="navChile" class="nav-item d-none">
+                    <a class="nav-link" href="chile.html">Situación Chile </a>
+                </li>
+                <li id="navLogin" class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#modalLogin" href="#">Iniciar sesión</a>
+                </li>
+                <li id="navCerrar" class="nav-item d-none">
+                    <a id="logout" class="nav-link" href="#">Cerrar sesión</a>
                 </li>
 
             </ul>
@@ -87,6 +93,42 @@
             </div>
         </div>
     </div>
+
+    <!-- MODAL INICIO DE SESION -->
+
+    <!--  -->
+    <div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Inicio de sesion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- FORM INICIO DE SESION -->
+                    <form id="formLogin">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                            <small id="emailHelp" class="form-text text-muted">
+                                Nunca compartiremos su correo electrónico con nadie.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPass">
+                        </div>
+                        <!-- <div class="modal-footer"> -->
+                        <button type="submit" class="btn btn-primary float-right">Iniciar sesión</button>
+                        <!-- </div> -->
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  -->
 
 
     <!-- ScrpitsBootstrap -->
