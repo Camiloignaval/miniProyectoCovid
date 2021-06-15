@@ -4,8 +4,7 @@ const requestChile = async (pais) => {
         let response = await fetch(`http://localhost:3000/api/countries/${pais}`);
         if (response.ok && response.status == 200) {
             let data = await response.json();
-            // console.log(data);
-            return data;
+            return data[pais];
         }
 
         else {

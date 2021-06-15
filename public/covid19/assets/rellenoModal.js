@@ -1,14 +1,13 @@
 import requestChile from "./requestChile.js";
 
 const rellenoModal = async (pais) => {
-
+    // Captura elementos del DOM
     let cuerpo = document.querySelector(`.modal-body`)
     cuerpo.innerHTML = ''
     let titulo = document.querySelector('.modal-title')
     titulo.innerHTML = `Detalles de ${pais}`
     // Se junta nombre de pais con _ entremedio
     let nombreJunto = pais.split(' ').join('_');
-    // Se ll
     let datos = await requestChile(nombreJunto);
 
     cuerpo.innerHTML = `<canvas id="graficoModal"></canvas>`
@@ -23,7 +22,7 @@ const rellenoModal = async (pais) => {
                 {
                     label: pais,
                     backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
-                    data: [datos[nombreJunto].confirmed, datos[nombreJunto].deaths, datos[nombreJunto].recovered, datos.active]
+                    data: [datos.confirmed, datos.deaths, datos.recovered, datos.active]
                 },
 
             ]

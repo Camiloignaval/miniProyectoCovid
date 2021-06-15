@@ -1,4 +1,5 @@
 const graficoChile = (confirmados, muertos, recuperados) => {
+    // Se separan arrays
     let fechas = confirmados.map(confirmados => confirmados.date)
     let confirmado = confirmados.map(confirmados => confirmados.total)
     let muerto = muertos.map(muertos => muertos.total)

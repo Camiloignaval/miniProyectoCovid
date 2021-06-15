@@ -11,6 +11,17 @@ let errorLogin = () => {
 
 }
 
+// Comprobacion siesque esta iniciado la sesion
+const init = async () => {
+    const token = localStorage.getItem('jsToken')
+    if (token) {
+        visibilidad()
+    }
+}
+
+init();
+
+// Funcion principal para rellenar grafico y tabla
 (async () => {
     let datos = await request('total')
     let datosFiltrados = datos.filter(dato => dato.active > 10000)
@@ -28,13 +39,11 @@ let errorLogin = () => {
     });
 
 })();
-
+// Evento para formulario
 document.getElementById('formLogin').addEventListener('submit', async (event) => {
     event.preventDefault()
     const email = document.getElementById('inputEmail').value;
     const password = document.getElementById('inputPass').value;
-
-
     let JWT = await postData(email, password);
     // console.log(JWT);
     if (JWT) {
@@ -45,18 +54,11 @@ document.getElementById('formLogin').addEventListener('submit', async (event) =>
         errorLogin()
     }
 })
+// Evento para boton logout
 document.getElementById('logout').addEventListener('click', () => {
     localStorage.clear();
     location.reload();
 
 })
 
-const init = async () => {
-    const token = localStorage.getItem('jsToken')
-    if (token) {
-        visibilidad()
-    }
-}
-
-init()
 
