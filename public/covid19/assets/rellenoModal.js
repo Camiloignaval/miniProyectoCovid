@@ -1,13 +1,16 @@
-import request from "./request.js";
+import requestChile from "./requestChile.js";
 
 const rellenoModal = async (pais) => {
+
     let cuerpo = document.querySelector(`.modal-body`)
     cuerpo.innerHTML = ''
     let titulo = document.querySelector('.modal-title')
     titulo.innerHTML = `Detalles de ${pais}`
+    // Se junta nombre de pais con _ entremedio
+    let nombreJunto = pais.split(' ').join('_');
+    // Se ll
+    let datos = await requestChile(nombreJunto);
 
-    let nombreJunto = pais.split(' ').join('%20');
-    let datos = await request(`countries/${nombreJunto}`);
     cuerpo.innerHTML = `<canvas id="graficoModal"></canvas>`
 
     // FORMA SIN FUNCIONES
@@ -18,9 +21,9 @@ const rellenoModal = async (pais) => {
             labels: ["casos confirmados", "casos muertos", "casos recuperados", "Casos activos"],
             datasets: [
                 {
-                    label: datos.location,
+                    label: pais,
                     backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9"],
-                    data: [datos.confirmed, datos.deaths, datos.recovered, datos.active]
+                    data: [datos[nombreJunto].confirmed, datos[nombreJunto].deaths, datos[nombreJunto].recovered, datos.active]
                 },
 
             ]

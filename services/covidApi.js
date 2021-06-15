@@ -6,7 +6,7 @@ class Covid19 {
         return axios.get(`${COVIDAPI}/v2/current`).then(r => r.data)
     }
     countries(country) {
-        return axios.get(`${COVIDAPI}/v2/country/${country}`)
+        return axios.get(`${COVIDAPI}/country/${country}`)
             .then(r => r.data)
             .catch(e => console.log(e))
     }
