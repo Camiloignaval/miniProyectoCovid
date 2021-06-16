@@ -14,7 +14,7 @@ logout();
 (async () => {
     let datos = await request('total')
     let datosFiltrados = datos.filter(dato => dato.active > 10000)
-    rellenarGrafico(datosFiltrados, "graficoPrincipal");
+    rellenarGrafico(datosFiltrados);
     imprimirTabla(datos);
     verMas();
 })();

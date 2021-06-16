@@ -1,9 +1,9 @@
 const rellenarGrafico = (datos) => {
     let nombres = datos.map(pais => pais.location)
-    let activos = datos.map(pais => pais.confirmed)
-    let confirmados = datos.map(pais => pais.deaths)
-    let muertos = datos.map(pais => pais.recovered)
-    let recuperados = datos.map(pais => pais.active)
+    let activos = datos.map(pais => pais.active)
+    let confirmados = datos.map(pais => pais.confirmed)
+    let muertos = datos.map(pais => pais.death)
+    let recuperados = datos.map(pais => pais.recovered)
 
     new Chart(document.getElementById("graficoPrincipal"), {
         type: 'bar',
