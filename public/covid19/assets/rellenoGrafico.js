@@ -1,11 +1,11 @@
-const rellenarGrafico = (datos, id) => {
+const rellenarGrafico = (datos) => {
     let nombres = datos.map(pais => pais.location)
     let activos = datos.map(pais => pais.confirmed)
     let confirmados = datos.map(pais => pais.deaths)
     let muertos = datos.map(pais => pais.recovered)
     let recuperados = datos.map(pais => pais.active)
 
-    new Chart(document.getElementById(id), {
+    new Chart(document.getElementById("graficoPrincipal"), {
         type: 'bar',
         data: {
             labels: nombres,
